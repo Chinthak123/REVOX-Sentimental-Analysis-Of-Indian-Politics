@@ -1,0 +1,78 @@
+INDIAN POLITICS SENTIMENT ANALYSIS DATASET
+==========================================
+File: indian_politics_sentiment_dataset.csv
+Total Records: 80
+Created: 2026-02-28
+
+COLUMN DESCRIPTIONS
+-------------------
+1. party               - Political party name
+2. state               - State or "National (Central)" for central govt
+3. year                - Reference year of governance/assessment
+4. region_type         - "State", "National", or "UT" (Union Territory)
+5. administration_score  - Governance quality score (1-10)
+6. education_score       - Education policy & delivery score (1-10)
+7. employment_score      - Employment rate & job creation score (1-10)
+8. health_score          - Healthcare access & quality score (1-10)
+9. public_transport_score - Public transport infrastructure score (1-10)
+10. overall_sentiment_score - Weighted average sentiment score (1-10)
+11. sentiment_label     - Categorical label: Positive / Neutral / Negative
+12. governance_review   - Short text review (for NLP training)
+
+SCORING SCALE
+-------------
+1.0 - 3.9  : Poor
+4.0 - 5.4  : Below Average
+5.5 - 6.4  : Neutral / Average
+6.5 - 7.4  : Good / Positive
+7.5 - 8.9  : Very Good / Strongly Positive
+9.0 - 10.0 : Excellent
+
+SENTIMENT LABELS
+----------------
+Positive  : overall_sentiment_score >= 6.5
+Neutral   : overall_sentiment_score between 5.5 and 6.4
+Negative  : overall_sentiment_score < 5.5
+
+PARTIES COVERED
+---------------
+BJP      - Bharatiya Janata Party
+INC      - Indian National Congress
+AAP      - Aam Aadmi Party
+TMC      - Trinamool Congress
+SP       - Samajwadi Party
+BSP      - Bahujan Samaj Party
+DMK      - Dravida Munnetra Kazhagam
+AIADMK   - All India Anna Dravida Munnetra Kazhagam
+TRS/BRS  - Telangana Rashtra Samithi / Bharat Rashtra Samithi
+YSR Congress - YSR Congress Party
+TDP      - Telugu Desam Party
+NCP      - Nationalist Congress Party
+Shiv Sena
+JDU      - Janata Dal (United)
+RJD      - Rashtriya Janata Dal
+LDF      - Left Democratic Front (CPI-M led)
+UDF      - United Democratic Front (INC led)
+SAD      - Shiromani Akali Dal
+JMM      - Jharkhand Mukti Morcha
+SKM      - Sikkim Krantikari Morcha
+NC       - National Conference
+PDP      - Peoples Democratic Party
+
+STATES/UTs COVERED
+-------------------
+Uttar Pradesh, Gujarat, Madhya Pradesh, Rajasthan, Himachal Pradesh,
+Assam, Tripura, Maharashtra, Karnataka, Uttarakhand, West Bengal,
+Bihar, Kerala, Tamil Nadu, Telangana, Andhra Pradesh, Punjab, Goa,
+Haryana, Jharkhand, Manipur, Meghalaya, Arunachal Pradesh, Sikkim,
+Jammu & Kashmir, Delhi (NCT), National Level (Central Government)
+
+NOTES
+-----
+- Scores are composite representations based on publicly reported
+  governance indices, survey data, and state report cards.
+- Data spans multiple years (2005-2023) to capture different tenures.
+- Suitable for: classification models, regression analysis, NLP training,
+  time-series sentiment tracking, and comparative political analysis.
+- Governance review column can be used for text-based sentiment training.
+- Scores reflect public perception and policy outcomes combined.
