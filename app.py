@@ -18,7 +18,7 @@ from groq import Groq
 
 load_dotenv()  # loads variables from .env into os.environ
 
-# ── Chatbot config ─────────────────────────────────────────────────────────────
+#Chatbot config 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_MODEL   = "llama-3.3-70b-versatile"          # ← Change model if needed
 
@@ -63,7 +63,7 @@ Communication Style:
 - Avoid slang
 - No emojis"""
 
-# ── NLTK VADER setup ─────────────────────────────────────────────────────────
+#NLTK VADER setup 
 import nltk
 
 def _ensure_vader():
@@ -75,13 +75,13 @@ def _ensure_vader():
 _ensure_vader()
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-# ── Paths ─────────────────────────────────────────────────────────────────────
+#Paths
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH  = os.path.join(BASE_DIR, "indian_politics_sentiment_dataset.csv")
 MODEL_DIR  = os.path.join(BASE_DIR, "model")
 MODEL_PATH = os.path.join(MODEL_DIR, "sentiment_pipeline.pkl")
 
-# ── Auto-train if model not found ─────────────────────────────────────────────
+#Auto-train if model not found
 def _load_or_train_model():
     if not os.path.exists(MODEL_PATH):
         print("Model not found — training now...")
@@ -90,7 +90,7 @@ def _load_or_train_model():
     with open(MODEL_PATH, "rb") as f:
         return pickle.load(f)
 
-# ── Global state ──────────────────────────────────────────────────────────────
+#Global state
 df        = pd.read_csv(DATA_PATH)
 pipeline  = _load_or_train_model()
 vader     = SentimentIntensityAnalyzer()
@@ -108,13 +108,13 @@ print(f"Dataset loaded: {len(df)} records | Years: {YEARS[0]}–{YEARS[-1]}")
 print("Model ready.")
 print("Open: http://localhost:5000")
 
-# ── FastAPI app ───────────────────────────────────────────────────────────────
+#FastAPI app
 STATIC_DIR  = os.path.join(BASE_DIR, "static")
 app         = FastAPI(title="Indian Political Sentiment Analyzer")
 groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY != "your-groq-api-key-here" else None
 
 
-# ── Pydantic request models ───────────────────────────────────────────────────
+#Pydantic request models
 class PredictRequest(BaseModel):
     text: str
 
@@ -126,7 +126,7 @@ class ChatRequest(BaseModel):
     messages: list[ChatMessage]
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+#Helpers
 def _vader_label(compound: float) -> str:
     if compound >= 0.05:
         return "Positive"
@@ -169,7 +169,7 @@ def _enrich_row(row: pd.Series) -> dict:
     }
 
 
-# ── Routes ────────────────────────────────────────────────────────────────────
+#Routes
 @app.get("/api/years")
 async def years():
     default_year = 2022 if 2022 in YEARS else YEARS[-1]
@@ -266,7 +266,7 @@ async def chat(body: ChatRequest):
     return {"reply": response.choices[0].message.content}
 
 
-# ── Serve React SPA (must be last) ───────────────────────────────────────────
+#Serve React SPA (must be last)
 if os.path.isdir(STATIC_DIR):
     app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
 else:
