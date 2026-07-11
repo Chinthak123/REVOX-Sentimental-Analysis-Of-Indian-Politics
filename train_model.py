@@ -1,8 +1,4 @@
-"""
-Standalone training script for Indian Political Sentiment Analyzer.
-Run: python train_model.py
-Saves model to: model/sentiment_pipeline.pkl
-"""
+
 
 import os
 import pickle
@@ -12,12 +8,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import classification_report
-
 DATA_PATH = "indian_politics_sentiment_dataset.csv"
 MODEL_DIR = "model"
 MODEL_PATH = os.path.join(MODEL_DIR, "sentiment_pipeline.pkl")
-
-
 def train_and_save(verbose=True):
     df = pd.read_csv(DATA_PATH)
     if verbose:
